@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>manual.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%D0%B2%D0%B2%D0%B5%D0%B4%D0%B5%D0%BD%D0%B8%D0%B5">Введение</h1>
+<p>DigitalPrint — это сервис для управления печатью, который позволяет легко настроить и управлять процессом печати через сервер, обеспечивая простоту использования и универсальность.</p>
+<p>Вам будет передан каталог client для установки, параметр PRINTER_ID и адрес сервера. Эти данные будут использоваться для настройки вашего окружения.</p>
+<p>Настройка включает в себя следующие этапы:</p>
+<ol>
+<li>
+<p><a href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-docker-%D0%B8-docker-compose">Установку Docker и Docker Compose</a></p>
+</li>
+<li>
+<p><a href="#%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%D0%B0">Настройку клиента и определение параметров принтера</a></p>
+</li>
+</ol>
+<h1 id="%D1%82%D0%B5%D1%80%D0%BC%D0%B8%D0%BD%D0%B0%D0%BB">Терминал</h1>
+<p>Для выполнения установки, потребуется использовать встроенный терминал Raspberry Pi <code>LXTerminal</code></p>
+<p>Как открыть:</p>
+<p><img src="assets/image1.png" alt="как-открыть-терминал"></p>
+<p>Выглядит он следующим образом:</p>
+<p><img src="assets/image2.png" alt="внешний-вид-терминала"></p>
+<p>Для вставки команд в терминал, используйте сочетание клавиш <code>ctrl + shift + c</code>, либо <code>правая клавиша мыши → Paste</code></p>
+<p><em>Команды нужно выполнять поочередно, дожидаясь выполнения каждой предыдущей</em></p>
+<h1 id="%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-docker-%D0%B8-docker-compose">Установка Docker и Docker Compose</h1>
+<p>Для начала необходимо установить Docker и Docker Compose на Raspberry Pi. Выполните следующие шаги:</p>
+<h2 id="%D1%88%D0%B0%D0%B3-1-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-docker">Шаг 1: Установка Docker</h2>
+<ol>
+<li>
+<p>Выполните обновление системы:</p>
+<pre class="hljs"><code><div>sudo apt-get update &amp;&amp; sudo apt-get upgrade -y
+</div></code></pre>
+</li>
+<li>
+<p>Установите Docker:</p>
+<ol>
+<li>Скачайте установочный скрипт<pre class="hljs"><code><div>curl -fsSL https://get.docker.com -o get-docker.sh
+</div></code></pre>
+</li>
+<li>Запустите установочный скрипт<pre class="hljs"><code><div>sudo sh get-docker.sh
+</div></code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>Проверьте успешную установку Docker</p>
+<pre class="hljs"><code><div>docker --version
+</div></code></pre>
+<p>Вы увидете в терминале:</p>
+<p><img src="assets/image3.png" alt="docker-установлен"></p>
+<p>Если версия отобразилась — значит установка прошла успешно, можно переходить к следующему шагу</p>
+</li>
+</ol>
+<h2 id="%D1%88%D0%B0%D0%B3-2-%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0-docker-compose">Шаг 2: Установка Docker Compose</h2>
+<ol>
+<li>
+<p>Установите необходимые зависимости:</p>
+<pre class="hljs"><code><div>sudo apt install python3-pip python3-dev libffi-dev libssl-dev
+</div></code></pre>
+</li>
+<li>
+<p>Установите Docker Compose:</p>
+<pre class="hljs"><code><div>sudo apt install docker-compose
+</div></code></pre>
+<p>Если в терминале появится вопрос</p>
+<pre class="hljs"><code><div>Do you want to <span class="hljs-built_in">continue</span>? [Y/n] 
+</div></code></pre>
+<p>Введите <code>y</code> и нажмите <code>Enter</code></p>
+</li>
+<li>
+<p>Проверьте успешную установку Docker Compose</p>
+<pre class="hljs"><code><div>docker compose version
+</div></code></pre>
+<p>Вы увидете в терминале</p>
+<p><img src="assets/image4.png" alt="docker-compose-установлен"></p>
+<p>Аналогично предыдущему, если версия отображается — можно переходить к следующему разделу</p>
+</li>
+</ol>
+<h1 id="%D0%BD%D0%B0%D1%81%D1%82%D1%80%D0%BE%D0%B9%D0%BA%D0%B0-%D0%BA%D0%BB%D0%B8%D0%B5%D0%BD%D1%82%D0%B0">Настройка клиента</h1>
+<p>В этом разделе вам нужно поработать с папкой clients: определить URI принтера, получить адрес хостинга и обновить файл .env, который находится внутри папки</p>
+<h2 id="%D1%88%D0%B0%D0%B3-1-%D0%BE%D0%BF%D1%80%D0%B5%D0%B4%D0%B5%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-uri-%D0%B8-%D0%B8%D0%BC%D0%B5%D0%BD%D0%B8-%D0%BF%D1%80%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D0%B0">Шаг 1: Определение URI и имени принтера</h2>
+<p>Для корректной работы хоста необходимо определить URI и имя вашего принтера</p>
+<ol>
+<li>
+<p>Остановите CUPS в системе</p>
+<pre class="hljs"><code><div>sudo systemctl stop cups
+</div></code></pre>
+<p>и</p>
+<pre class="hljs"><code><div>sudo systemctl <span class="hljs-built_in">disable</span> cups
+</div></code></pre>
+</li>
+<li>
+<p>Соберите контейнер:</p>
+<p>Тут понадобится ранее скачанная папка client. Поместив ее на рабочий стол, она будет доступна по пути <code>Desktop/client</code></p>
+<ol>
+<li>Нужно перейти в папку <code>client</code> используя терминал</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> Desktop/client
+</div></code></pre>
+<p>В случае, если папка расположена по другому пути, используйте команды <code>cd</code> для перехода и <code>ls</code> для поиска</p>
+<p>Итак, после перехода в нужную директорию, потребуется собрать контейнер. Для этого, находясь внутри <code>client</code>, введите команду</p>
+<pre class="hljs"><code><div>sudo docker compose up --build
+</div></code></pre>
+<p>Дождитесь сборки контейнера. После сборки, вы будете видеть много ошибок</p>
+</li>
+<li>
+<p>Зайдите внутрь контейнера. Для этого, откройте новый терминал и напишите в нем команду:</p>
+<pre class="hljs"><code><div>sudo docker <span class="hljs-built_in">exec</span> -it print_client bash
+</div></code></pre>
+<p><em>Дальнейшие команды выполняются внутри контейнера</em></p>
+</li>
+<li>
+<p>Получение имени и URI принтера</p>
+<p>Для начала, введите команду:</p>
+<pre class="hljs"><code><div>avahi-browse -art
+</div></code></pre>
+<p>Далее, можно увидеть строки, наподобие этих:</p>
+<pre class="hljs"><code><div>=     lo IPv4 Kyocera ECOSYS P5026cdn (USB)                 Internet Printer     <span class="hljs-built_in">local</span>
+hostname = [raspberrypi.local]
+address = [127.0.0.1]
+port = [60000]
+txt = [<span class="hljs-string">"air=none"</span> <span class="hljs-string">"mopria-certified=2.0"</span> <span class="hljs-string">"rp=ipp/print"</span> ...]
+</div></code></pre>
+<p>Исходя из этой информации, нужно собрать URI и имя принтера</p>
+<p>Для данного случая, URI имеет структуру:</p>
+<pre class="hljs"><code><div>ipp://{address}:{port}/{rp}
+</div></code></pre>
+<p>После замены, получаем:</p>
+<pre class="hljs"><code><div>ipp://127.0.0.1:60000/ipp/print
+</div></code></pre>
+<p>Имя принтера видно из вывода выше: <code>Kyocera ECOSYS P5026cdn</code></p>
+<p>Но для дальнейшего использования, потребуется заменить пробелы на нижние подчеркивания</p>
+<p>Получаем <code>Kyocera_ECOSYS_P5026cdn</code></p>
+</li>
+</ol>
+<p>Итак, после выполнения, мы имеем URI принтера и его имя. С этой информацией, переходим к следующему шагу</p>
+<h2 id="%D1%88%D0%B0%D0%B3-2-%D1%80%D0%B5%D0%B4%D0%B0%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5-env">Шаг 2: Редактирование .env</h2>
+<p><code>.env</code> — ключевой файл для настройки системы client. По умолчанию является скрытым и может не отображаться.</p>
+<p>Для того, чтобы это исправить, нужно перейти во вкладку <code>View</code> и поставить галочку напротив <code>Show Hidden</code>:</p>
+<p><img src="assets/image7.png" alt="show-hidden"></p>
+<p>Далее, откроем файл <code>.env</code>, он имеет такую структуру:</p>
+<pre><code>```env
+PRINTER_ID=1
+PRINTER_NAME=await
+PRINTER_URI=await
+PRINTER_PPD=everywhere
+SERVER_ADDRESS=https://digital-production-efdd.up.railway.app
+```
+</code></pre>
+<p>В нем необходимо заменить:</p>
+<p><code>PRINTER_ID</code> — Уникальный идентификатор для каждой точки. Был передан ранее</p>
+<p><code>PRINTER_NAME</code> — был получен ранее. В нашем случае, будет иметь вид <code>Kyocera_ECOSYS_P5026cdn</code></p>
+<p><code>PRINTER_URI</code> — был получен ранее. В нашем случае, будет иметь вид <code>ipp://127.0.0.1:60000/ipp/print</code></p>
+<p><code>SERVER_ADDRESS</code> — был передан ранее</p>
+<p>Итак, получаем файл со следующим содержимым:</p>
+<pre><code>```env
+PRINTER_ID=1
+PRINTER_NAME=Kyocera_ECOSYS_P5026cdn
+PRINTER_URI=ipp://127.0.0.1:60000/ipp/print
+PRINTER_PPD=everywhere
+SERVER_ADDRESS=https://digital-production-efdd.up.railway.app
+```
+</code></pre>
+<p>После внесения изменений, необходимо сохранить файл (File → Save), после чего, можно закрыть</p>
+<h2 id="%D1%88%D0%B0%D0%B3-3-%D0%BF%D0%B5%D1%80%D0%B5%D0%B7%D0%B0%D0%BF%D1%83%D1%81%D0%BA-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0">Шаг 3: перезапуск контейнера</h2>
+<p>После редактирования <code>.env</code> файла, нужно перезапустить контейнер. Для этого, достаточно кликнуть внутри терминала, где он был запущен и нажать <code>ctrl + c</code></p>
+<p>После чего, командой <code>sudo docker compose up --build</code>, запустите контейнер повторно</p>
+<p>На этом установка завершена, можно тестировать сервис через бота</p>
+
+</body>
+</html>
